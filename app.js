@@ -47,11 +47,11 @@ class GalleryApp {
     }
 
     updateTimer() {
-        const target = new Date('2026-04-30T00:00:00'); // ТВОЯ ДАТА ТУТ
+        const target = new Date('2026-04-30T21:00:00'); // ТВОЯ ДАТА ТУТ
         const diff = target - new Date();
         const widget = document.getElementById('timer-widget');
         if (diff <= 0) { widget.innerText = "Скоро приду..."; return; }
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
         const dec = (n, t) => t[(n%10==1 && n%100!=11)?0:(n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20))?1:2];
         widget.innerText = `До приезда: ${days} ${dec(days, ['день', 'дня', 'дней'])}`;
     }
