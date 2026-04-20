@@ -31,7 +31,7 @@ class GalleryApp {
         
         this.spawnRate = 13000;      // Время между фото в обычном режиме
         this.pauseDuration = 4000;   // Пауза после взаимодействия
-        this.resistance = 0.94;
+        this.resistance = 0.98;
         this.isSpawning = false;
         this.spawnTimeout = null;
 
@@ -137,8 +137,16 @@ class GalleryApp {
                     gsap.to(state.el, { scale: 1.05, duration: 0.2 });
                 },
                 move: (e) => {
-                    state.x += e.dx; state.y += e.dy;
-                    state.vx = e.dx; state.vy = e.dy;
+                    state.x += e.dx; 
+                    state.y += e.dy;
+    
+                    // Проверяем, сенсорный ли это ввод
+                    const isTouch = e.pointerType === 'touch';
+                    const multiplier = isTouch ? 2.5 : 1.2; // На телефоне ускоряем в 2.5 раза
+    
+                    state.vx = e.dx * multiplier; 
+                    state.vy = e.dy * multiplier;
+    
                     gsap.set(state.el, { x: state.x, y: state.y });
                 },
                 end: () => {
