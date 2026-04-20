@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Живая Галерея</title>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        :root { --bg: #050505; --accent: #ff2d55; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: var(--bg); overflow: hidden; font-family: sans-serif; }
+        
+        #gallery-container { 
+            position: relative; 
+            width: 100%; 
+            height: 100%; 
+            z-index: 1;
+            isolation: isolate; /* Изолируем контекст наложения */
+        }
+
+        /* Затемняющий слой теперь внутри контейнера */
+        #overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 5000; /* Промежуточный слой */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            will-change: opacity;
+        }
+
+        #timer-widget {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            z-index: 9000; background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px); padding: 10px 22px; border-radius: 40px;
+            color: #fff; border: 1px solid rgba(255,255,255,0.1);
+            pointer-events: none; font-size: 14px;
+        }
+
+        #secret-btn {
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) scale(0);
+            z-index: 10000; padding: 16px 35px; background: var(--accent);
+            color: white; border: none; border-radius: 50px; font-size: 18px; font-weight: bold;
+            cursor: pointer; box-shadow: 0 15px 30px rgba(255, 45, 85, 0.4);
+        }
+
+        .photo-card {
+            position: absolute; width: 220px; height: 280px;
+            background-size: contain; background-repeat: no-repeat; background-position: center;
+            background-color: transparent;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
+            will-change: transform, z-index;
+            touch-action: none; cursor: grab;
+            transform-origin: center center;
+            /* Форсируем создание отдельного слоя отрисовки */
+            transform: translateZ(0); 
+        }
+    </style>
+</head>
+<body>
+
+    <div id="timer-widget">Загрузка...</div>
+    <button id="secret-btn">жмай, Именинница! 🎁</button>
+    
+    <div id="gallery-container">
+        <div id="overlay"></div>
+        </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
