@@ -47,7 +47,7 @@ class GalleryApp {
     }
 
     updateTimer() {
-        const target = new Date('2026-04-30T21:00:00'); // ТВОЯ ДАТА ТУТ
+        const target = new Date('2026-04-30T00:00:00'); // ТВОЯ ДАТА ТУТ
         const diff = target - new Date();
         const widget = document.getElementById('timer-widget');
         if (diff <= 0) { widget.innerText = "Скоро приду..."; return; }
@@ -59,7 +59,7 @@ class GalleryApp {
     checkDate() {
         const now = new Date();
         // Месяц 3 = Апрель. Если приезд в Мае, ставь 4.
-        if (now.getMonth() === 3 && now.getDate() === 26 && now.getFullYear() === 2026) {
+        if (now.getMonth() === 3 && now.getDate() === 21 && now.getFullYear() === 2026) {
             const btn = document.getElementById('secret-btn');
             gsap.to(btn, { scale: 1, duration: 0.8, ease: "back.out" });
             btn.onclick = () => window.location.href = 'birthday.html';
