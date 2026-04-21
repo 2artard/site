@@ -58,7 +58,7 @@ class GalleryApp {
 
     checkDate() {
         const now = new Date();
-        if (now.getMonth() === 3 && now.getDate() === 21 && now.getFullYear() === 2026) {
+        if (now.getMonth() === 3 && now.getDate() === 22 && now.getFullYear() === 2026) {
             const btn = document.getElementById('secret-btn');
             gsap.to(btn, { scale: 1, duration: 0.8, ease: "back.out" });
             btn.onclick = () => window.location.href = 'birthday.html';
