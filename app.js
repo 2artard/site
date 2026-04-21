@@ -50,7 +50,7 @@ class GalleryApp {
         const target = new Date('2026-04-30T00:00:00'); // ТВОЯ ДАТА ТУТ
         const diff = target - new Date();
         const widget = document.getElementById('timer-widget');
-        if (diff <= 0) { widget.innerText = "Скоро приду..."; return; }
+        if (diff <= 0) { widget.innerText = "Буду вечером..."; return; }
         const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
         const dec = (n, t) => t[(n%10==1 && n%100!=11)?0:(n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20))?1:2];
         widget.innerText = `До приезда: ${days} ${dec(days, ['день', 'дня', 'дней'])}`;
@@ -58,8 +58,7 @@ class GalleryApp {
 
     checkDate() {
         const now = new Date();
-        // Месяц 3 = Апрель. Если приезд в Мае, ставь 4.
-        if (now.getMonth() === 3 && now.getDate() === 21 && now.getFullYear() === 2026) {
+        if (now.getMonth() === 3 && now.getDate() === 26 && now.getFullYear() === 2026) {
             const btn = document.getElementById('secret-btn');
             gsap.to(btn, { scale: 1, duration: 0.8, ease: "back.out" });
             btn.onclick = () => window.location.href = 'birthday.html';
