@@ -58,10 +58,18 @@ class GalleryApp {
 
     checkDate() {
         const now = new Date();
-        if (now.getMonth() === 3 && now.getDate() === 22 && now.getFullYear() === 2026) {
+        // Создаем дату целевого дня в местном времени
+        const isTargetDay = 
+            now.getFullYear() === 2026 &&
+            now.getMonth() === 3 && // Апрель
+            now.getDate() >= 22;    // Используем >= чтобы кнопка не исчезла после праздника
+
+        if (isTargetDay) {
             const btn = document.getElementById('secret-btn');
-            gsap.to(btn, { scale: 1, duration: 0.8, ease: "back.out" });
-            btn.onclick = () => window.location.href = 'birthday.html';
+            if (btn) {
+                gsap.to(btn, { scale: 1, duration: 0.8, ease: "back.out" });
+                btn.onclick = () => window.location.href = 'birthday.html';
+            }
         }
     }
 

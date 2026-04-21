@@ -99,10 +99,12 @@
         window.onload = () => {
 
             const now = new Date();
-            // ВНИМАНИЕ: Для теста сейчас можно закомментировать этот блок!
-            // Месяц 3 = Апрель
-            if (!(now.getMonth() === 3 && now.getDate() === 22 && now.getFullYear() === 2026)) {
-                // Если хочешь потестить прямо сейчас, закомментируй строку ниже:
+            const targetDate = new Date(2026, 3, 22); // 22 апреля 2026
+
+            // Сравниваем только даты (без учета времени)
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+            if (today < targetDate) {
                 document.getElementById('lock-screen').style.visibility = 'visible';
                 return;
             }
