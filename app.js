@@ -62,7 +62,7 @@ class GalleryApp {
         const isTargetDay = 
             now.getFullYear() === 2026 &&
             now.getMonth() === 3 && // Апрель
-            now.getDate() >= 22;    // Используем >= чтобы кнопка не исчезла после праздника
+            now.getDate() >= 26;    // Используем >= чтобы кнопка не исчезла после праздника
 
         if (isTargetDay) {
             const btn = document.getElementById('secret-btn');
