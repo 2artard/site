@@ -94,6 +94,9 @@ class GalleryApp {
     }
 
     spawnPhoto() {
+        // Если фото увеличено — выходим, ничего не создаем
+        if (this.zoomedCard) return; 
+
         const activeIds = this.activeCards.map(c => c.id);
         const available = photosDB.filter(p => !activeIds.includes(p.id));
         if (available.length === 0) return;
@@ -167,8 +170,15 @@ class GalleryApp {
         if (!state.zoomed) {
             this.zoomedCard = state;
             state.zoomed = true;
+        
+            // 1. ОСТАНАВЛИВАЕМ СПАВН, пока смотрим фото
+            this.stopLifecycle(); 
+        
             this.bringToFront(state);
-            state.el.style.zIndex = 9999;
+        
+            // 2. ПРИНУДИТЕЛЬНО ставим самый высокий индекс
+            state.el.style.zIndex = 99999; 
+        
             this.overlay.style.opacity = 1;
             this.overlay.style.pointerEvents = 'auto';
 
@@ -189,10 +199,15 @@ class GalleryApp {
             this.overlay.style.opacity = 0;
             this.overlay.style.pointerEvents = 'none';
 
+            // 3. ВОЗОБНОВЛЯЕМ СПАВН после закрытия
+            this.startLifecycle();
+
             gsap.to(state.el, {
                 x: state.x, y: state.y, scale: 1, rotation: state.rot,
                 duration: 0.4, ease: "power2.inOut",
-                onComplete: () => { state.el.style.zIndex = state.z; }
+                onComplete: () => { 
+                    state.el.style.zIndex = state.z; 
+                }
             });
         }
     }
